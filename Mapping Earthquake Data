@@ -1,0 +1,39 @@
+import json
+import folium
+
+#earthquake GeoJSON data
+with open('Earthquakes.geojson', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+
+# Extract earthquake 
+earthquakes = data['features']
+
+# Create a base map
+m = folium.Map(location=[0, 0], zoom_start=2)
+
+# Each earthquake
+for eq in earthquakes:
+    props = eq['properties']
+    coords = eq['geometry']['coordinates']
+    lon, lat, depth = coords
+    magnitude = props.get('mag', 0)
+    place = props.get('place', 'Unknown location')
+
+    # Determine marker color based on magnitude
+    color = 'green' if magnitude < 3 else 'orange' if magnitude < 5 else 'red'
+
+    popup_text = f"Location: {place}<br>Magnitude: {magnitude}<br>Depth: {depth} km"
+
+    folium.CircleMarker(
+        location=[lat, lon],
+        radius=max(3, magnitude * 1.5),
+        color=color,
+        fill=True,
+        fill_color=color,
+        fill_opacity=0.7,
+        popup=popup_text
+    ).add_to(m)
+
+# Save the map to an HTML file
+m.save('earthquake_map.html')
+print("Map has been saved as 'earthquake_map.html'")
