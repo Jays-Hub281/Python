@@ -1,0 +1,74 @@
+class User:
+    """class representing a user profile."""
+    
+    def __init__(self, first_name, last_name, rank, email, location):
+        """Initialize the user with first name, last name, and additional attributes."""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.rank = rank
+        self.email = email
+        self.location = location
+        self.login_attempts = 0
+    
+    def describe_user(self):
+        """Print a summary of the user's information."""
+        print(f"User Profile:")
+        print(f"Name: {self.first_name} {self.last_name}")
+        print(f"Rank: {self.rank}")
+        print(f"Email: {self.email}")
+        print(f"Location: {self.location}")
+    
+    def greet_user(self):
+        """Print a personalized greeting to the user."""
+        print(f"Hello, {self.first_name}! Welcome back Soldier!")
+    
+    def increment_login_attempts(self):
+        """Increment the number of login attempts."""
+        self.login_attempts += 1
+    
+    def reset_login_attempts(self):
+        """Reset the login attempts to 0."""
+        self.login_attempts = 0
+
+class Privileges:
+    """ class to store an admin's privileges."""
+    
+    def __init__(self, privileges=None):
+        """Initialize the privileges attribute."""
+        if privileges is None:
+            self.privileges = []
+        else:
+            self.privileges = privileges
+    
+    def show_privileges(self):
+        """Display the privileges of the admin."""
+        if self.privileges:
+            print("Administrator privileges:")
+            for privilege in self.privileges:
+                print(f"- {privilege}")
+        else:
+            print("This administrator has no privileges assigned.")
+
+class Admin(User):
+    """A special kind of user with administrative privileges."""
+    
+    def __init__(self, first_name, last_name, rank, email, location):
+        """Initialize attributes of the parent class and add privileges."""
+        super().__init__(first_name, last_name, rank, email, location)
+        self.privileges = Privileges()
+
+# Creating an instance of User
+user1 = User("John", "Doe", "Major", "johndoe@example.com", "New York")
+user1.describe_user()
+user1.greet_user()
+user1.increment_login_attempts()
+user1.increment_login_attempts()
+user1.increment_login_attempts()
+print(f"Login attempts: {user1.login_attempts}")
+user1.reset_login_attempts()
+print(f"Login attempts after reset: {user1.login_attempts}")
+
+# Creating an instance of Admin
+admin_user = Admin("Alice", "Smith", "Administrator", "alice@example.com", "Los Angeles")
+admin_user.privileges.privileges = ["can add post", "can delete post", "can ban user"]
+admin_user.privileges.show_privileges()
