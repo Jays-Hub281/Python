@@ -1,0 +1,73 @@
+
+class Restaurant:
+    """ class representing a restaurant."""
+    
+class Restaurant:
+    """ class representing a restaurant."""
+    
+    def __init__(self, restaurant_name, cuisine_type):
+        """restaurant with a name and cuisine type."""
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+        self.number_served = 0
+    
+    def describe_restaurant(self):
+        """Print the restaurant's name and cuisine type."""
+        print(f"Restaurant Name: {self.restaurant_name}")
+        print(f"Cuisine Type: {self.cuisine_type}")
+    
+    def open_restaurant(self):
+        """Indicate restaurant is open."""
+        print(f"{self.restaurant_name} is open!")
+    
+    def set_number_served(self, number):
+        """Set the number of customers served."""
+        self.number_served = number
+    
+    def increment_number_served(self, number):
+        """Increment the number of customers served."""
+        self.number_served += number
+
+class IceCreamStand(Restaurant):
+    """a specific type of restaurant that serves ice cream."""
+    
+    def __init__(self, restaurant_name, cuisine_type="Ice Cream"):
+        """Initialize attributes of the parent class and add flavors."""
+        super().__init__(restaurant_name, cuisine_type)
+        self.flavors = []
+    
+    def display_flavors(self):
+        """Display available ice cream flavors."""
+        if self.flavors:
+            print(f"{self.restaurant_name} offers the following flavors:")
+            for flavor in self.flavors:
+                print(f"- {flavor}")
+        else:
+            print(f"{self.restaurant_name} currently has no flavors available.")
+
+# restaurants
+restaurant = Restaurant("Garden Olive", "Italian")
+print(restaurant.restaurant_name)
+print(restaurant.cuisine_type)
+print(f"Customers served: {restaurant.number_served}")
+restaurant.number_served = 10
+print(f"Customers served: {restaurant.number_served}")
+restaurant.set_number_served(25)
+print(f"Customers served: {restaurant.number_served}")
+restaurant.increment_number_served(5)
+print(f"Customers served: {restaurant.number_served}")
+
+restaurant1 = Restaurant("JT's Pizza", "American bar food")
+restaurant2 = Restaurant("JT's fortune cookie", "Chinese food")
+restaurant3 = Restaurant("JT's Bowls", "Italian food")
+
+restaurant1.describe_restaurant()
+restaurant2.describe_restaurant()
+restaurant3.describe_restaurant()
+
+# Creating an instance of IceCreamStand
+ice_cream_stand = IceCreamStand("Sweet Thangs")
+ice_cream_stand.flavors = ["Vanilla", "Chocolate", "Strawberry", "Mint"]
+ice_cream_stand.describe_restaurant()
+print(f"Customers served: {ice_cream_stand.number_served}")
+ice_cream_stand.display_flavors()
