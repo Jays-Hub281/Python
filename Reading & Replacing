@@ -1,0 +1,28 @@
+# Read the entire file
+print("Reading the entire file:\n")
+with open("learning_python.txt") as file:
+    content = file.read()
+    print(content)
+
+# Loop over the file object
+print("\nReading line by line using a for loop:\n")
+with open("learning_python.txt") as file:
+    for line in file:
+        print(line.strip())
+
+# Store lines in a list and work outside the with block
+print("\nReading lines into a list and printing outside the with block:\n")
+with open("learning_python.txt") as file:
+    lines = file.readlines()
+
+for line in lines:
+    print(line.strip())
+
+# Replace 'Python' with other languages
+languages = ["Ruby", "JavaScript", "Swift", "C++"]
+
+for lang in languages:
+    print(f"\n--- Replacing 'Python' with '{lang}' ---")
+    with open("learning_python.txt") as file:
+        for line in file:
+            print(line.replace("Python", lang).strip()
