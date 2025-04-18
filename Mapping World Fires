@@ -1,0 +1,26 @@
+import pandas as pd
+import folium
+
+# Load CSV data into DataFrame
+df = pd.read_csv("world_fires_1_day.csv")
+
+# Filter necessary columns: latitude, longitude, brightness
+fire_data = df[['latitude', 'longitude', 'brightness']]
+
+# Create a base folium map using default tiles
+fire_map = folium.Map(location=[0, 0], zoom_start=2)
+
+# Add fire points to the map
+for _, row in fire_data.iterrows():
+    folium.CircleMarker(
+        location=(row['latitude'], row['longitude']),
+        radius=4,
+        color='red',
+        fill=True,
+        fill_opacity=0.7,
+        popup=f"Brightness: {row['brightness']}"
+    ).add_to(fire_map)
+
+# Save the map to an HTML file
+fire_map.save("world_fires_map.html")
+print("Map saved to: world_fires_map.html")
